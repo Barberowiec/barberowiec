@@ -1,0 +1,37 @@
+name: Refresh Booksy stats
+
+# Runs every day, scrapes the live Booksy review count + rating,
+# updates index.html, and commits the change (which triggers a redeploy).
+on:
+  schedule:
+    - cron: '17 4 * * *'    # ~05:17 / 06:17 Warsaw time (GitHub cron is UTC)
+  workflow_dispatch: {}      # also lets you run it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install requests
+
+      - run: python update_stats.py
+
+      - name: Commit if the numbers changed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name  "stats-bot"
+            git config user.email "stats-bot@users.noreply.github.com"
+            git add index.html
+            git commit -m "chore: refresh Booksy stats"
+            git push
+          else
+            echo "No change today."
+          fi
