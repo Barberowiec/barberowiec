@@ -837,8 +837,11 @@
     :root { --red: #E0564F; }
 
     /* White header + logo, no stripe */
-    .nav { background: rgba(255,255,255,0.96); border-bottom: 1px solid #e6e6e6; }
-    .nav__logo-img { height: 34px; width: auto; display: block; }
+    .nav { background: #ffffff; border-bottom: 1px solid #e6e6e6; }
+    .nav__logo-img { height: 44px; width: auto; display: block; }
+    /* Zarezerwuj CTA in the site's red tone */
+    .btn--accent { background: var(--red); color: #fff; }
+    .btn--accent:hover { background: #c74a43; }
     .nav__links a { color: #1A1A1A; }
     .nav__links a:hover { color: var(--red); }
     .nav__links a::after { background: var(--red); }
