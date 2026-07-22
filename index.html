@@ -714,10 +714,10 @@
       height: 300px;
       border: 0;
       border-radius: 6px;
-      filter: grayscale(1);
+      filter: none;
       transition: filter 0.4s ease;
     }
-    .contact__map:hover { filter: grayscale(0); }
+    .contact__map:hover { filter: none; }
     .contact__maplink {
       display: inline-flex;
       align-items: center;
@@ -875,6 +875,12 @@
     .gallery__item { padding: 0; border: 0; background: var(--card); border-radius: 6px; overflow: hidden; cursor: pointer; aspect-ratio: 1; }
     .gallery__item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15); transition: transform .45s ease, filter .3s ease; }
     .gallery__item:hover img { transform: scale(1.06); filter: grayscale(0); }
+    .gallery__more { display: none; background: transparent; border: 1px solid var(--border); color: var(--text); padding: 12px 28px; border-radius: 4px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: .02em; cursor: pointer; transition: border-color .25s ease, color .25s ease; }
+    .gallery__more:hover { border-color: var(--accent); color: var(--accent); }
+    @media (max-width: 600px) {
+      .gallery:not(.is-expanded) .gallery__item:nth-child(n+6) { display: none; }
+      .gallery:not(.is-expanded) .gallery__more { display: block; margin: 24px auto 0; }
+    }
 
     /* Lightbox */
     .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 1200; opacity: 0; visibility: hidden; transition: opacity .25s ease; }
@@ -1109,7 +1115,6 @@
         <h3 class="addons__title">Dodatki</h3>
         <div class="addon-row">
           <span class="service-row__name">Wyrywanie włosów woskiem — nos / uszy</span>
-          <span class="addon-row__note">cena ustalana na miejscu</span>
         </div>
       </div>
     </div>
@@ -1176,6 +1181,7 @@
         <button class="gallery__item reveal" data-full="gallery/g23.jpg" aria-label="Powiększ zdjęcie 23"><img src="gallery/g23.jpg" alt="Realizacja Barberowiec 23" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g24.jpg" aria-label="Powiększ zdjęcie 24"><img src="gallery/g24.jpg" alt="Realizacja Barberowiec 24" loading="lazy" /></button>
       </div>
+      <button class="gallery__more" type="button">Pokaż więcej zdjęć</button>
     </div>
     <div class="lightbox" id="lightbox" aria-hidden="true">
       <button class="lightbox__close" aria-label="Zamknij">&times;</button>
@@ -1375,6 +1381,13 @@
         b.addEventListener('click', function () { open(b.getAttribute('data-full'), b.querySelector('img').alt); });
       });
       lb.addEventListener('click', close);
+      document.querySelectorAll('.gallery__more').forEach(function (m) {
+        m.addEventListener('click', function () {
+          var sec = m.closest('.gallery');
+          sec.classList.add('is-expanded');
+          sec.querySelectorAll('.gallery__item').forEach(function (it) { it.classList.add('is-visible'); });
+        });
+      });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
     })();
   </script>
