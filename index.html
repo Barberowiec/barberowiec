@@ -422,13 +422,26 @@
       display: flex;
       align-items: center;
       padding-top: var(--nav-h);
+      background-color: var(--bg);
       background-image:
-        linear-gradient(to right, rgba(0,0,0,0.88) 40%, rgba(0,0,0,0.35)),
+        linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.72) 42%, rgba(0,0,0,0.25) 78%, rgba(0,0,0,0.05) 100%),
         url('tlo1.jpg');
-      background-size: cover;
-      background-position: center;
+      background-size: cover, contain;
+      background-position: center, right center;
+      background-repeat: no-repeat, no-repeat;
     }
-    .hero__content { max-width: 720px; }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(15,15,15,0) 0%, var(--bg) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero__content { max-width: 720px; position: relative; z-index: 2; }
     .hero__line {
       width: 48px;
       height: 2px;
@@ -847,11 +860,11 @@
     .nav__links a::after { background: var(--red); }
     .nav__hamburger span { background: #1A1A1A; }
     /* Logo centered in header: links left, logo center, CTA right */
-    .nav__inner { display: grid; grid-template-columns: 1fr auto 1fr; }
-    .nav__links { grid-column: 1; justify-self: start; }
-    .nav__logo { grid-column: 2; justify-self: center; }
-    .nav__cta { grid-column: 3; justify-self: end; }
-    .nav__hamburger { grid-column: 3; justify-self: end; }
+    .nav__inner { display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: 100%; align-content: center; }
+    .nav__links { grid-column: 1; grid-row: 1; justify-self: start; }
+    .nav__logo { grid-column: 2; grid-row: 1; justify-self: center; }
+    .nav__cta { grid-column: 3; grid-row: 1; justify-self: end; }
+    .nav__hamburger { grid-column: 3; grid-row: 1; justify-self: end; }
 
     /* BARBER in light red */
     .hero__title .accent { color: var(--red); }
@@ -1165,16 +1178,13 @@
       </div>
       <div class="gallery__grid">
         <button class="gallery__item reveal" data-full="gallery/g01.jpg" aria-label="Powiększ zdjęcie 1"><img src="gallery/g01.jpg" alt="Realizacja Barberowiec 1" loading="lazy" /></button>
-        <button class="gallery__item reveal" data-full="gallery/g02.jpg" aria-label="Powiększ zdjęcie 2"><img src="gallery/g02.jpg" alt="Realizacja Barberowiec 2" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g03.jpg" aria-label="Powiększ zdjęcie 3"><img src="gallery/g03.jpg" alt="Realizacja Barberowiec 3" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g04.jpg" aria-label="Powiększ zdjęcie 4"><img src="gallery/g04.jpg" alt="Realizacja Barberowiec 4" loading="lazy" /></button>
-        <button class="gallery__item reveal" data-full="gallery/g05.jpg" aria-label="Powiększ zdjęcie 5"><img src="gallery/g05.jpg" alt="Realizacja Barberowiec 5" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g06.jpg" aria-label="Powiększ zdjęcie 6"><img src="gallery/g06.jpg" alt="Realizacja Barberowiec 6" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g07.jpg" aria-label="Powiększ zdjęcie 7"><img src="gallery/g07.jpg" alt="Realizacja Barberowiec 7" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g08.jpg" aria-label="Powiększ zdjęcie 8"><img src="gallery/g08.jpg" alt="Realizacja Barberowiec 8" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g09.jpg" aria-label="Powiększ zdjęcie 9"><img src="gallery/g09.jpg" alt="Realizacja Barberowiec 9" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g10.jpg" aria-label="Powiększ zdjęcie 10"><img src="gallery/g10.jpg" alt="Realizacja Barberowiec 10" loading="lazy" /></button>
-        <button class="gallery__item reveal" data-full="gallery/g11.jpg" aria-label="Powiększ zdjęcie 11"><img src="gallery/g11.jpg" alt="Realizacja Barberowiec 11" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g12.jpg" aria-label="Powiększ zdjęcie 12"><img src="gallery/g12.jpg" alt="Realizacja Barberowiec 12" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g13.jpg" aria-label="Powiększ zdjęcie 13"><img src="gallery/g13.jpg" alt="Realizacja Barberowiec 13" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g14.jpg" aria-label="Powiększ zdjęcie 14"><img src="gallery/g14.jpg" alt="Realizacja Barberowiec 14" loading="lazy" /></button>
@@ -1182,7 +1192,6 @@
         <button class="gallery__item reveal" data-full="gallery/g16.jpg" aria-label="Powiększ zdjęcie 16"><img src="gallery/g16.jpg" alt="Realizacja Barberowiec 16" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g17.jpg" aria-label="Powiększ zdjęcie 17"><img src="gallery/g17.jpg" alt="Realizacja Barberowiec 17" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g18.jpg" aria-label="Powiększ zdjęcie 18"><img src="gallery/g18.jpg" alt="Realizacja Barberowiec 18" loading="lazy" /></button>
-        <button class="gallery__item reveal" data-full="gallery/g19.jpg" aria-label="Powiększ zdjęcie 19"><img src="gallery/g19.jpg" alt="Realizacja Barberowiec 19" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g20.jpg" aria-label="Powiększ zdjęcie 20"><img src="gallery/g20.jpg" alt="Realizacja Barberowiec 20" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g21.jpg" aria-label="Powiększ zdjęcie 21"><img src="gallery/g21.jpg" alt="Realizacja Barberowiec 21" loading="lazy" /></button>
         <button class="gallery__item reveal" data-full="gallery/g22.jpg" aria-label="Powiększ zdjęcie 22"><img src="gallery/g22.jpg" alt="Realizacja Barberowiec 22" loading="lazy" /></button>
