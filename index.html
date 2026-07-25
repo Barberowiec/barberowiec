@@ -442,6 +442,28 @@
       z-index: 1;
     }
     .hero__content { max-width: 720px; position: relative; z-index: 2; }
+    .hero__photo { display: none; }
+    /* Mobile hero: photo flush under header, text below, fade at photo bottom */
+    @media (max-width: 600px) {
+      .hero {
+        display: block;
+        min-height: 0;
+        padding-top: var(--nav-h);
+        background-image: none;
+        background-color: var(--bg);
+      }
+      .hero::after { display: none; }
+      .hero__photo {
+        display: block;
+        width: 100%;
+        height: auto;
+        -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+      }
+      .hero__content { max-width: none; padding-top: 18px; padding-bottom: 32px; }
+      .hero__buttons { margin-bottom: 22px; }
+      #onas { padding-top: 44px; }
+    }
     .hero__line {
       width: 48px;
       height: 2px;
@@ -971,6 +993,7 @@
 
   <!-- ============================ HERO ============================ -->
   <header class="hero">
+    <img class="hero__photo" src="tlo1.jpg" alt="Barber przy pracy w Barberowiec" />
     <div class="container">
       <div class="hero__content">
         <div class="hero__line"></div>
