@@ -442,28 +442,6 @@
       z-index: 1;
     }
     .hero__content { max-width: 720px; position: relative; z-index: 2; }
-    .hero__photo { display: none; }
-    /* Mobile hero: photo flush under header, text below, fade at photo bottom */
-    @media (max-width: 600px) {
-      .hero {
-        display: block;
-        min-height: 0;
-        padding-top: var(--nav-h);
-        background-image: none;
-        background-color: var(--bg);
-      }
-      .hero::after { display: none; }
-      .hero__photo {
-        display: block;
-        width: 100%;
-        height: auto;
-        -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
-        mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
-      }
-      .hero__content { max-width: none; padding-top: 18px; padding-bottom: 32px; }
-      .hero__buttons { margin-bottom: 22px; }
-      #onas { padding-top: 44px; }
-    }
     .hero__line {
       width: 48px;
       height: 2px;
@@ -914,6 +892,26 @@
     .gallery { background: var(--bg-darker); }
     .gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 46px; }
     @media (min-width: 901px) { .gallery__grid { grid-template-columns: repeat(5, 1fr); } }
+
+    /* Mobile hero: photo as a background behind the text (title -> "Zobacz cennik") */
+    @media (max-width: 600px) {
+      .hero { display: block; min-height: 0; padding-top: var(--nav-h); background-image: none; background-color: var(--bg); }
+      .hero::after { display: none; }
+      .hero__content { max-width: none; padding-bottom: 38px; }
+      .hero__lead {
+        margin: 0 -24px;
+        padding: 36px 24px 30px;
+        background-image:
+          linear-gradient(to bottom, rgba(0,0,0,0.48) 0%, rgba(0,0,0,0.55) 60%, var(--bg) 100%),
+          url('tlo1.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .hero__buttons { margin-bottom: 0; }
+      .hero__stats { margin-top: 22px; }
+      #onas { padding-top: 44px; }
+    }
     .gallery__item { padding: 0; border: 0; background: var(--card); border-radius: 6px; overflow: hidden; cursor: pointer; aspect-ratio: 1; }
     .gallery__item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15); transition: transform .45s ease, filter .3s ease; }
     .gallery__item:hover img { transform: scale(1.06); filter: grayscale(0); }
@@ -993,9 +991,9 @@
 
   <!-- ============================ HERO ============================ -->
   <header class="hero">
-    <img class="hero__photo" src="tlo1.jpg" alt="Barber przy pracy w Barberowiec" />
     <div class="container">
       <div class="hero__content">
+        <div class="hero__lead">
         <div class="hero__line"></div>
         <h1 class="hero__title">
           <span>TWÓJ</span>
@@ -1008,6 +1006,7 @@
              href="https://booksy.com/pl-pl/251939_barberowiec-barbershop-bialoleka_barber-shop_3_warszawa"
              target="_blank" rel="noopener">Zarezerwuj wizytę</a>
           <a class="btn btn--outline" href="#uslugi">Zobacz cennik</a>
+        </div>
         </div>
         <div class="hero__stats">
           <div class="stat">
